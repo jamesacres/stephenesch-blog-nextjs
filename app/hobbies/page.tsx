@@ -1,9 +1,8 @@
 import projectsData from '@/data/projectsData';
 import Card from '@/components/Card';
 import { genPageMetadata } from 'app/seo';
-import Link from 'next/link';
 
-export const metadata = genPageMetadata({ title: 'Projects' });
+export const metadata = genPageMetadata({ title: 'Hobbies' });
 
 export default function Projects() {
   return (
@@ -13,20 +12,6 @@ export default function Projects() {
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             Hobbies
           </h1>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            This page lists my side projects worked on in my own time. I have
-            more on the way soon!
-            <br />
-            You can also read about what I'm currently up to at work on my{' '}
-            <Link
-              href="/about"
-              className="text-base font-medium leading-6 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-              aria-label={`Link to about page`}
-            >
-              about page
-            </Link>
-            .
-          </p>
         </div>
         <div className="container py-12">
           <div className="-m-4 flex flex-wrap">

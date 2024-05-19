@@ -11,8 +11,8 @@ const MAX_DISPLAY = 5;
 export default function Home({ posts }) {
   return (
     <>
-      <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pb-8 pt-6 md:space-y-5">
+      <div>
+        <div>
           <div className="flex flex-row">
             <div className="flex items-center justify-end">
               <Image
@@ -26,11 +26,24 @@ export default function Home({ posts }) {
               <SpeechBubble>{siteMetadata.description}</SpeechBubble>
             </div>
           </div>
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+
+          <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl md:text-6xl">
+            Ratings
+          </h1>
+          <p className="my-8">
+            <Link
+              href="/ratings"
+              className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+            >
+              Explore ratings
+            </Link>
+          </p>
+          <hr className="my-8" />
+          <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl md:text-6xl">
             Recently Published
           </h1>
         </div>
-        <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+        <ul>
           {!posts.length && 'No posts found.'}
           {posts.slice(0, MAX_DISPLAY).map((post) => {
             const { slug, date, title, summary, tags, images, readingTime } =
