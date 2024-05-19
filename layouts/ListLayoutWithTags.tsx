@@ -1,44 +1,52 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-'use client'
+'use client';
 
-import { usePathname } from 'next/navigation'
-import { slug } from 'github-slugger'
-import { formatDate } from 'pliny/utils/formatDate'
-import { CoreContent } from 'pliny/utils/contentlayer'
-import type { Blog } from 'contentlayer/generated'
-import Link from '@/components/Link'
-import Tag from '@/components/Tag'
-import siteMetadata from '@/data/siteMetadata'
-import tagData from 'app/tag-data.json'
+import { usePathname } from 'next/navigation';
+import { slug } from 'github-slugger';
+import { formatDate } from 'pliny/utils/formatDate';
+import { CoreContent } from 'pliny/utils/contentlayer';
+import type { Blog } from 'contentlayer/generated';
+import Link from '@/components/Link';
+import Tag from '@/components/Tag';
+import siteMetadata from '@/data/siteMetadata';
+import tagData from 'app/tag-data.json';
+import Image from '@/components/Image';
 
 interface PaginationProps {
-  totalPages: number
-  currentPage: number
+  totalPages: number;
+  currentPage: number;
 }
 interface ListLayoutProps {
-  posts: CoreContent<Blog>[]
-  title: string
-  initialDisplayPosts?: CoreContent<Blog>[]
-  pagination?: PaginationProps
+  posts: CoreContent<Blog>[];
+  title: string;
+  initialDisplayPosts?: CoreContent<Blog>[];
+  pagination?: PaginationProps;
 }
 
 function Pagination({ totalPages, currentPage }: PaginationProps) {
-  const pathname = usePathname()
-  const basePath = pathname.split('/')[1]
-  const prevPage = currentPage - 1 > 0
-  const nextPage = currentPage + 1 <= totalPages
+  const pathname = usePathname();
+  const basePath = pathname.split('/')[1];
+  const prevPage = currentPage - 1 > 0;
+  const nextPage = currentPage + 1 <= totalPages;
 
   return (
     <div className="space-y-2 pb-8 pt-6 md:space-y-5">
       <nav className="flex justify-between">
         {!prevPage && (
-          <button className="cursor-auto disabled:opacity-50" disabled={!prevPage}>
+          <button
+            className="cursor-auto disabled:opacity-50"
+            disabled={!prevPage}
+          >
             Previous
           </button>
         )}
         {prevPage && (
           <Link
-            href={currentPage - 1 === 1 ? `/${basePath}/` : `/${basePath}/page/${currentPage - 1}`}
+            href={
+              currentPage - 1 === 1
+                ? `/${basePath}/`
+                : `/${basePath}/page/${currentPage - 1}`
+            }
             rel="prev"
           >
             Previous
@@ -48,7 +56,10 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
           {currentPage} of {totalPages}
         </span>
         {!nextPage && (
-          <button className="cursor-auto disabled:opacity-50" disabled={!nextPage}>
+          <button
+            className="cursor-auto disabled:opacity-50"
+            disabled={!nextPage}
+          >
             Next
           </button>
         )}
@@ -59,7 +70,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
         )}
       </nav>
     </div>
-  )
+  );
 }
 
 export default function ListLayoutWithTags({
@@ -68,12 +79,13 @@ export default function ListLayoutWithTags({
   initialDisplayPosts = [],
   pagination,
 }: ListLayoutProps) {
-  const pathname = usePathname()
-  const tagCounts = tagData as Record<string, number>
-  const tagKeys = Object.keys(tagCounts)
-  const sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a])
+  const pathname = usePathname();
+  const tagCounts = tagData as Record<string, number>;
+  const tagKeys = Object.keys(tagCounts);
+  const sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a]);
 
-  const displayPosts = initialDisplayPosts.length > 0 ? initialDisplayPosts : posts
+  const displayPosts =
+    initialDisplayPosts.length > 0 ? initialDisplayPosts : posts;
 
   return (
     <>
@@ -87,7 +99,9 @@ export default function ListLayoutWithTags({
           <div className="hidden h-full max-h-screen min-w-[280px] max-w-[280px] flex-wrap overflow-auto rounded bg-gray-50 pt-5 shadow-md dark:bg-gray-900/70 dark:shadow-gray-800/40 sm:flex">
             <div className="px-6 py-4">
               {pathname.startsWith('/blog') ? (
-                <h3 className="font-bold uppercase text-primary-500">All Posts</h3>
+                <h3 className="font-bold uppercase text-primary-500">
+                  All Posts
+                </h3>
               ) : (
                 <Link
                   href={`/blog`}
@@ -114,28 +128,52 @@ export default function ListLayoutWithTags({
                         </Link>
                       )}
                     </li>
-                  )
+                  );
                 })}
               </ul>
             </div>
           </div>
           <div>
-            <ul>
+            <ul className="divide-y divide-gray-200 dark:divide-gray-700">
               {displayPosts.map((post) => {
-                const { path, date, title, summary, tags } = post
+                const {
+                  path,
+                  date,
+                  title,
+                  summary,
+                  tags,
+                  images,
+                  readingTime,
+                } = post;
                 return (
                   <li key={path} className="py-5">
                     <article className="flex flex-col space-y-2 xl:space-y-0">
                       <dl>
                         <dt className="sr-only">Published on</dt>
                         <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                          <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
+                          <Link href={`/${path}`}>
+                            <time dateTime={date}>
+                              {formatDate(date, siteMetadata.locale)}
+                            </time>
+                            {images?.length > 0 && (
+                              <Image
+                                className="my-2.5"
+                                alt=""
+                                src={images[0]}
+                                width={200}
+                                height={200}
+                              />
+                            )}
+                          </Link>
                         </dd>
                       </dl>
                       <div className="space-y-3">
                         <div>
                           <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                            <Link href={`/${path}`} className="text-gray-900 dark:text-gray-100">
+                            <Link
+                              href={`/${path}`}
+                              className="text-gray-900 dark:text-gray-100"
+                            >
                               {title}
                             </Link>
                           </h2>
@@ -146,18 +184,35 @@ export default function ListLayoutWithTags({
                         <div className="prose max-w-none text-gray-500 dark:text-gray-400">
                           {summary}
                         </div>
+                        <div className="text-base font-medium leading-6">
+                          <Link
+                            href={`/${path}`}
+                            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                            aria-label={`Read more: "${title}"`}
+                          >
+                            {readingTime?.text ? (
+                              <>{readingTime.text}</>
+                            ) : (
+                              'Read more'
+                            )}{' '}
+                            &rarr;
+                          </Link>
+                        </div>
                       </div>
                     </article>
                   </li>
-                )
+                );
               })}
             </ul>
             {pagination && pagination.totalPages > 1 && (
-              <Pagination currentPage={pagination.currentPage} totalPages={pagination.totalPages} />
+              <Pagination
+                currentPage={pagination.currentPage}
+                totalPages={pagination.totalPages}
+              />
             )}
           </div>
         </div>
       </div>
     </>
-  )
+  );
 }

@@ -1,5 +1,5 @@
-import Image from './Image'
-import Link from './Link'
+import Image from './Image';
+import Link from './Link';
 
 const Card = ({ title, description, imgSrc, href }) => (
   <div className="md max-w-[544px] p-4 md:w-1/2">
@@ -14,7 +14,7 @@ const Card = ({ title, description, imgSrc, href }) => (
             <Image
               alt={title}
               src={imgSrc}
-              className="object-cover object-center md:h-36 lg:h-48"
+              className="object-contain object-center"
               width={544}
               height={306}
             />
@@ -23,7 +23,7 @@ const Card = ({ title, description, imgSrc, href }) => (
           <Image
             alt={title}
             src={imgSrc}
-            className="object-cover object-center md:h-36 lg:h-48"
+            className="object-contain object-center"
             width={544}
             height={306}
           />
@@ -38,7 +38,9 @@ const Card = ({ title, description, imgSrc, href }) => (
             title
           )}
         </h2>
-        <p className="prose mb-3 max-w-none text-gray-500 dark:text-gray-400">{description}</p>
+        <p className="prose mb-3 max-w-none text-gray-500 dark:text-gray-400">
+          {description}
+        </p>
         {href && (
           <Link
             href={href}
@@ -51,6 +53,6 @@ const Card = ({ title, description, imgSrc, href }) => (
       </div>
     </div>
   </div>
-)
+);
 
-export default Card
+export default Card;
