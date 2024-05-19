@@ -42,7 +42,7 @@ title: '${artist}: ${title} (${release_year})'
 date: '${rating_date.substring(0, 10)}'
 lastmod: '${rating_date.substring(0, 10)}'
 tags:
-  ['Artist ${artist}', 'Rated ${ratingOutOfFive}', 'Release Year ${release_year}', 'Release Decade ${`${release_year}`.substring(0, 1)}0']
+  ['Artist ${artist}', 'Rated ${ratingOutOfFive}', 'Release Year ${release_year}', 'Release Decade ${`${release_year}`.substring(0, 3)}0']
 summary: 'Rated ${ratingOutOfFive}'
 authors: ['default']
 images: ['/content/images/${key}.jpg']
