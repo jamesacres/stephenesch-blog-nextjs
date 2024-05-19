@@ -298,12 +298,14 @@ const { artist } = await enquirer.prompt({
   type: 'input',
   name: 'artist',
   message: 'What is the artist name?',
+  result: (value) => value.trim(),
 });
 
 const { title } = await enquirer.prompt({
   type: 'input',
   name: 'title',
   message: 'What is the release title?',
+  result: (value) => value.trim(),
 });
 
 const { releaseYear } = await enquirer.prompt({
@@ -311,6 +313,7 @@ const { releaseYear } = await enquirer.prompt({
   name: 'releaseYear',
   message: 'What is the release year',
   initial: new Date().toISOString().substring(0, 4),
+  result: (value) => value.trim(),
 });
 
 const { ratingDate } = await enquirer.prompt({
@@ -318,6 +321,7 @@ const { ratingDate } = await enquirer.prompt({
   name: 'ratingDate',
   message: 'When was it rated?',
   initial: new Date().toISOString().substring(0, 10),
+  result: (value) => value.trim(),
 });
 
 const { rating: ratingOutput } = await new Scale({
@@ -389,4 +393,4 @@ try {
 }
 
 console.info('Created', blogPath);
-console.info('Please save album art to', `content/images/${key}.jpg`);
+console.info('Please save album art to', `public/content/images/${key}.jpg`);
