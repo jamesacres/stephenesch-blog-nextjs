@@ -52,7 +52,7 @@ export default function TagPage({
     )
   );
 
-  const pageNumber = 1;
+  const pageNumber = parseInt(params.page as string);
   const initialDisplayPosts = filteredPosts.slice(
     POSTS_PER_PAGE * (pageNumber - 1),
     POSTS_PER_PAGE * pageNumber

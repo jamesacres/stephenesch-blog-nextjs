@@ -2,14 +2,12 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { slug } from 'github-slugger';
 import { formatDate } from 'pliny/utils/formatDate';
 import { CoreContent } from 'pliny/utils/contentlayer';
 import type { Blog } from 'contentlayer/generated';
 import Link from '@/components/Link';
 import Tag from '@/components/Tag';
 import siteMetadata from '@/data/siteMetadata';
-import tagData from 'app/tag-data.json';
 import Image from '@/components/Image';
 
 interface PaginationProps {
@@ -25,7 +23,10 @@ interface ListLayoutProps {
 
 function Pagination({ totalPages, currentPage }: PaginationProps) {
   const pathname = usePathname();
-  const basePath = pathname.split('/')[1];
+  let basePath = pathname.split('/')[1];
+  basePath = pathname.includes('tags')
+    ? `${basePath}/${pathname.split('/')[2]}`
+    : basePath;
   const prevPage = currentPage - 1 > 0;
   const nextPage = currentPage + 1 <= totalPages;
 
@@ -79,11 +80,6 @@ export default function ListLayoutWithTags({
   initialDisplayPosts = [],
   pagination,
 }: ListLayoutProps) {
-  const pathname = usePathname();
-  const tagCounts = tagData as Record<string, number>;
-  const tagKeys = Object.keys(tagCounts);
-  const sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a]);
-
   const displayPosts =
     initialDisplayPosts.length > 0 ? initialDisplayPosts : posts;
 
