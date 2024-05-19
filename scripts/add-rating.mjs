@@ -363,11 +363,11 @@ console.info({
 
 const blogPath = `data/blog/${key}.mdx`;
 const blogContent = `---
-title: '${artist}: ${title} (${releaseYear})'
+title: '${artist.replaceAll("'", "''")}: ${title.replaceAll("'", "''")} (${releaseYear})'
 date: '${ratingDate.substring(0, 10)}'
 lastmod: '${ratingDate.substring(0, 10)}'
 tags:
-  ['Artist ${artist}', 'Rated ${ratingOutOfFive}', 'Release Year ${releaseYear}', 'Release Decade ${`${releaseYear}`.substring(0, 3)}0']
+  ['Artist ${artist.replaceAll("'", "''")}', 'Rated ${ratingOutOfFive}', 'Release Year ${releaseYear}', 'Release Decade ${`${releaseYear}`.substring(0, 3)}0']
 summary: 'Rated ${ratingOutOfFive}'
 authors: ['default']
 images: ['/content/images/${key}.jpg']
@@ -375,11 +375,11 @@ images: ['/content/images/${key}.jpg']
 
 export const data = {
   key: '${key}',
-  title: '${title}',
+  title: '${title.replaceAll("'", "\\'")}',
   release_year: ${releaseYear},
   rating: ${ratingOutOfTen},
   rating_date: '${ratingDate}',
-  artist: '${artist}',
+  artist: '${artist.replaceAll("'", "\\'")}',
 };
 
 <MusicRating data={data} />
