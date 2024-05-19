@@ -49,7 +49,19 @@ export default function TagPage({
       allBlogs.filter(
         (post) => post.tags && post.tags.map((t) => slug(t)).includes(tag)
       )
-    )
+    ).sort((a, b) => {
+      const aReleaseYear = Number(
+        a.tags
+          .find((tag) => tag.startsWith('Release Year '))
+          ?.replace('Release Year ', '') || '0'
+      );
+      const bReleaseYear = Number(
+        b.tags
+          .find((tag) => tag.startsWith('Release Year '))
+          ?.replace('Release Year ', '') || '0'
+      );
+      return bReleaseYear - aReleaseYear;
+    })
   );
 
   const pageNumber = 1;
