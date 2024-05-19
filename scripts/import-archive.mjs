@@ -75,7 +75,6 @@ export const data = {
       console.error(e);
       console.error(`failed to download `, albumArtUrl);
     }
-    return;
   }
 }
 
