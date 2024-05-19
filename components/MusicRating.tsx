@@ -7,6 +7,7 @@ interface MusicRatingData {
   release_year: number;
   rating: number;
   rating_date: string;
+  artist: string;
 }
 
 const MusicRating = ({
