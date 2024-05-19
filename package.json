@@ -3,6 +3,7 @@
   "version": "2.1.0",
   "private": true,
   "scripts": {
+    "add-rating": "node ./scripts/add-rating.mjs",
     "start": "next dev",
     "dev": "cross-env INIT_CWD=$PWD next dev",
     "build": "cross-env INIT_CWD=$PWD next build && cross-env NODE_OPTIONS='--experimental-json-modules' node ./scripts/postbuild.mjs",
@@ -54,6 +55,7 @@
     "@typescript-eslint/eslint-plugin": "^6.1.0",
     "@typescript-eslint/parser": "^6.1.0",
     "cross-env": "^7.0.3",
+    "enquirer": "^2.4.1",
     "eslint": "^8.45.0",
     "eslint-config-next": "^14.0.3",
     "eslint-config-prettier": "^8.8.0",
