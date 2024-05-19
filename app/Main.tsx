@@ -14,6 +14,14 @@ export default function Home({ posts }) {
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">
           <div className="flex flex-row">
+            <div className="flex items-center justify-end">
+              <Image
+                alt="Vinyl"
+                src="/static/images/logo.png"
+                width={100}
+                height={100}
+              />
+            </div>
             <div className="basis-3/4">
               <SpeechBubble>{siteMetadata.description}</SpeechBubble>
             </div>
