@@ -34,7 +34,7 @@ export default function PostLayout({
   prev,
   children,
 }: LayoutProps) {
-  const { filePath, slug, date, title, tags, readingTime } = content;
+  const { filePath, slug, date, title, tags } = content;
   const basePath = '/';
 
   return (

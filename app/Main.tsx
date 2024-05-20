@@ -46,8 +46,7 @@ export default function Home({ posts }) {
         <ul>
           {!posts.length && 'No posts found.'}
           {posts.slice(0, MAX_DISPLAY).map((post) => {
-            const { slug, date, title, summary, tags, images, readingTime } =
-              post;
+            const { slug, date, title, summary, tags, images } = post;
             return (
               <li key={slug} className="py-12">
                 <article>
