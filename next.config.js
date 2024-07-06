@@ -64,7 +64,9 @@ module.exports = () => {
     eslint: {
       dirs: ['app', 'components', 'layouts', 'scripts'],
     },
-    images: {},
+    images: {
+      unoptimized: true,
+    },
     async headers() {
       return [
         {
