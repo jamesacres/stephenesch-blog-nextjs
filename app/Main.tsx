@@ -6,7 +6,7 @@ import NewsletterForm from 'pliny/ui/NewsletterForm';
 import Image from '@/components/Image';
 import SpeechBubble from '@/components/SpeechBubble';
 
-const MAX_DISPLAY = 5;
+const POSTS_PER_PAGE = 100;
 
 export default function Home({ posts }) {
   return (
@@ -45,7 +45,7 @@ export default function Home({ posts }) {
         </div>
         <ul>
           {!posts.length && 'No posts found.'}
-          {posts.slice(0, MAX_DISPLAY).map((post) => {
+          {posts.slice(0, POSTS_PER_PAGE).map((post) => {
             const { slug, date, title, summary, tags, images } = post;
             return (
               <li key={slug} className="py-12">
@@ -108,7 +108,7 @@ export default function Home({ posts }) {
           })}
         </ul>
       </div>
-      {posts.length > MAX_DISPLAY && (
+      {posts.length > POSTS_PER_PAGE && (
         <div className="flex justify-end text-base font-medium leading-6">
           <Link
             href="/blog/page/2"
